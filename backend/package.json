@@ -1,0 +1,36 @@
+{
+  "name": "ai-agent-backend",
+  "version": "1.0.0",
+  "description": "AI Agent Backend with Fastify and LangChain",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "keywords": [
+    "ai",
+    "langchain",
+    "fastify",
+    "agent"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@langchain/community": "^0.3.0",
+    "@langchain/core": "^0.3.0",
+    "@langchain/google-genai": "^0.1.12",
+    "@langchain/openai": "^0.3.0",
+    "dotenv": "^16.4.5",
+    "fastify": "^4.26.0",
+    "langchain": "^0.3.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
+  }
+}
