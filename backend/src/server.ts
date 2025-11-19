@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { env } from './config/env.js';
 import { chatRoute } from './routes/chat.js';
+import { patientVectorStore } from './services/patientVectorStore.js';
 
 /**
  * Fastify Server Setup
@@ -29,6 +30,11 @@ server.get('/health', async () => {
 // Start server
 const start = async () => {
   try {
+    // Initialize patient vector store (RAG system)
+    console.log('🔄 Initializing RAG system...');
+    await patientVectorStore.initialize();
+    console.log('✅ RAG system ready');
+
     const port = Number(env.PORT);
     await server.listen({ port, host: '0.0.0.0' });
     console.log(`🚀 Server running on http://localhost:${port}`);
