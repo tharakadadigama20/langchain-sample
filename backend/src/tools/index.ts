@@ -3,6 +3,7 @@ import { webSearchTool } from './webSearchTool.js';
 import { customToolExample } from './customToolExample.js';
 import { patientQueryTool } from './patientQueryTool.js';
 import { transcriptionCorrectionTool } from './transcriptionCorrectionTool.js';
+import { mbsCodeTool } from './mbsCodeTool.js';
 
 /**
  * Tool Registry
@@ -15,5 +16,6 @@ export const tools = [
   customToolExample,
   patientQueryTool,
   transcriptionCorrectionTool,
+  mbsCodeTool,
 ];
 
