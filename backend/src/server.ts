@@ -3,6 +3,7 @@ import cors from '@fastify/cors';
 import { env } from './config/env.js';
 import { chatRoute } from './routes/chat.js';
 import { patientVectorStore } from './services/patientVectorStore.js';
+import { medicalTermsVectorStore } from './services/medicalTermsVectorStore.js';
 
 /**
  * Fastify Server Setup
@@ -33,7 +34,12 @@ const start = async () => {
     // Initialize patient vector store (RAG system)
     console.log('🔄 Initializing RAG system...');
     await patientVectorStore.initialize();
-    console.log('✅ RAG system ready');
+    console.log('✅ Patient RAG system ready');
+
+    // Initialize medical terms vector store
+    console.log('🔄 Initializing medical terminology database...');
+    await medicalTermsVectorStore.initialize();
+    console.log('✅ Medical terminology system ready');
 
     const port = Number(env.PORT);
     await server.listen({ port, host: '0.0.0.0' });
