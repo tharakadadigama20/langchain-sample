@@ -30,8 +30,9 @@ export function createLLM() {
 
     return new ChatGoogleGenerativeAI({
       modelName: 'gemini-2.5-flash', // Use Gemini 2.5 models (1.5 models deprecated for new projects)
-      temperature: 0.7,
+      temperature: 0.3, // Lower temperature for more consistent, complete responses
       streaming: true,
+      maxOutputTokens: 2048, // Ensure sufficient tokens for complete responses
       apiKey: env.GOOGLE_API_KEY,
     });
   }

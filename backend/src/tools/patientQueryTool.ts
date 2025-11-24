@@ -124,15 +124,32 @@ Content: ${content}
       if (patientId) {
         const patient = getPatientById(patientId);
         if (patient) {
-          directPatientInfo = `\n\nDirect Patient Lookup (${patientId}):
+          // Format conditions as separate lines
+          const conditionsList = patient.conditions
+            .map((c, i) => `  ${i + 1}. ${c.name} (ICD-10: ${c.icd10Code}, Status: ${c.status}, Diagnosed: ${c.diagnosedDate})`)
+            .join('\n');
+          
+          // Format medications as separate lines with full details
+          const medicationsList = patient.medications
+            .map((m, i) => `  ${i + 1}. ${m.name} - ${m.dosage}, ${m.frequency} (Started: ${m.startDate}, Prescribed by: ${m.prescribingDoctor})`)
+            .join('\n');
+          
+          directPatientInfo = `\n\n=== DIRECT PATIENT LOOKUP (${patientId}) ===
 Name: ${patient.firstName} ${patient.lastName}
 Age: ${patient.age}, Gender: ${patient.gender}
 MRN: ${patient.mrn || 'N/A'}
-Conditions: ${patient.conditions.map((c) => c.name).join(', ')}
-Medications: ${patient.medications.map((m) => `${m.name} (${m.dosage})`).join(', ')}
+
+CONDITIONS (${patient.conditions.length} total):
+${conditionsList}
+
+MEDICATIONS (${patient.medications.length} total):
+${medicationsList}
+
 Last Visit: ${patient.lastVisitDate || 'N/A'}
-Next Appointment: ${patient.nextAppointment || 'N/A'}`;
+Next Appointment: ${patient.nextAppointment || 'N/A'}
+=== END PATIENT LOOKUP ===`;
         }
+
       } else if (patientName) {
         const nameParts = patientName.trim().split(/\s+/);
         const firstName = nameParts[0];

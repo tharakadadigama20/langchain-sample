@@ -142,7 +142,10 @@ class PatientVectorStoreService {
       filteredResults = results.filter(([doc]) => filter(doc.metadata));
     }
 
-    return filteredResults.map(([doc, score]) => ({
+    // Take only the requested number of results after filtering
+    const finalResults = filteredResults.slice(0, limit);
+
+    return finalResults.map(([doc, score]) => ({
       content: doc.pageContent,
       metadata: doc.metadata,
       relevanceScore: score,
@@ -152,6 +155,9 @@ class PatientVectorStoreService {
   /**
    * Search with metadata filters
    * Useful for filtering by patient ID, date range, etc.
+   * 
+   * IMPORTANT: When metadata filters are provided, we search a larger set first
+   * to ensure documents matching the filter aren't excluded due to low similarity scores.
    */
   async searchWithMetadata(
     query: string,
@@ -189,7 +195,13 @@ class PatientVectorStoreService {
       return true;
     };
 
-    return this.search(query, { limit, filter });
+    // When filters are provided, search a much larger set first (up to 50 documents)
+    // to ensure we don't miss documents that match the filter but have lower similarity scores.
+    // This is especially important when the query doesn't semantically match well with the content.
+    const hasFilters = Object.keys(metadataFilters).length > 0;
+    const searchLimit = hasFilters ? Math.max(limit * 10, 50) : limit;
+
+    return this.search(query, { limit: searchLimit, filter });
   }
 
   /**
