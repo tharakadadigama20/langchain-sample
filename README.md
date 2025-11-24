@@ -169,14 +169,6 @@ Then add it to `backend/src/tools/index.ts`:
 export const tools = [calculationTool, webSearchTool, myTool];
 ```
 
-## 🚧 Future Enhancements
-
-- [ ] RAG integration with vector stores
-- [ ] Authentication and user sessions
-- [ ] LangSmith tracing integration
-- [ ] Web search API integration (Tavily, Serper)
-- [ ] Additional tool integrations
-
 ## 📝 License
 
 MIT
