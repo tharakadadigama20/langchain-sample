@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { env } from './config/env.js';
 import { chatRoute } from './routes/chat.js';
+import { downloadRoute } from './routes/download.js';
 import { patientVectorStore } from './services/patientVectorStore.js';
 import { medicalTermsVectorStore } from './services/medicalTermsVectorStore.js';
 
@@ -22,6 +23,8 @@ await server.register(cors, {
 
 // Register routes
 await server.register(chatRoute);
+await server.register(downloadRoute);
+
 
 // Health check endpoint
 server.get('/health', async () => {

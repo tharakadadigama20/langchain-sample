@@ -58,3 +58,46 @@ export interface BillingOpportunityOutput {
   };
   recommendations: string[];
 }
+
+/**
+ * Medicare Report Types
+ */
+export interface SessionData {
+  consultationNotes: string;
+  consultationDate: string;
+  consultationType: string;
+  duration: string;
+}
+
+export interface PatientInfo {
+  name: string;
+  dateOfBirth: string;
+  medicareNumber?: string; // Optional for demo
+  age?: number;
+}
+
+export interface ProviderInfo {
+  name: string;
+  providerNumber?: string; // Optional for demo
+  specialty?: string;
+}
+
+export interface MedicareReportInput {
+  sessionData: SessionData;
+  mbsCodes: MBSCode[];
+  patientInfo: PatientInfo;
+  providerInfo: ProviderInfo;
+}
+
+export interface MedicareReportOutput {
+  success: boolean;
+  pdfPath?: string;
+  reportId: string;
+  generatedAt: string;
+  summary: {
+    totalItems: number;
+    totalFee: string;
+    clinicalSummary: string;
+  };
+  error?: string;
+}

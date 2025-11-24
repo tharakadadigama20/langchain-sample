@@ -5,6 +5,7 @@ import { patientQueryTool } from './patientQueryTool.js';
 import { transcriptionCorrectionTool } from './transcriptionCorrectionTool.js';
 import { mbsCodeTool } from './mbsCodeTool.js';
 import { billingOpportunityTool } from './billingOpportunityTool.js';
+import { medicareReportTool } from './medicareReportTool.js';
 
 /**
  * Tool Registry
@@ -19,5 +20,6 @@ export const tools = [
   transcriptionCorrectionTool,
   mbsCodeTool,
   billingOpportunityTool,
+  medicareReportTool,
 ];
 
