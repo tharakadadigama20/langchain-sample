@@ -4,6 +4,7 @@ import { customToolExample } from './customToolExample.js';
 import { patientQueryTool } from './patientQueryTool.js';
 import { transcriptionCorrectionTool } from './transcriptionCorrectionTool.js';
 import { mbsCodeTool } from './mbsCodeTool.js';
+import { billingOpportunityTool } from './billingOpportunityTool.js';
 
 /**
  * Tool Registry
@@ -17,5 +18,6 @@ export const tools = [
   patientQueryTool,
   transcriptionCorrectionTool,
   mbsCodeTool,
+  billingOpportunityTool,
 ];
 

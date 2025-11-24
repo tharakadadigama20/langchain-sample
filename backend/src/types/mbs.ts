@@ -28,3 +28,33 @@ export interface MBSCodeOutput {
   };
   warnings?: string[];
 }
+
+/**
+ * Billing Opportunity Types
+ */
+export type OpportunityType = 
+  | 'chronic_disease_plan' 
+  | 'health_assessment' 
+  | 'procedure' 
+  | 'consultation_upgrade' 
+  | 'mental_health'
+  | 'after_hours';
+
+export interface BillingOpportunity {
+  code: MBSCode;
+  opportunityType: OpportunityType;
+  reasoning: string;
+  confidence: 'high' | 'medium' | 'low';
+  potentialFee: string;
+  requirements: string;
+}
+
+export interface BillingOpportunityOutput {
+  missedOpportunities: BillingOpportunity[];
+  summary: {
+    totalOpportunities: number;
+    potentialAdditionalRevenue: string;
+    highConfidenceCount: number;
+  };
+  recommendations: string[];
+}
